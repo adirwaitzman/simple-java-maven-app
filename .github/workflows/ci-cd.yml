@@ -21,10 +21,10 @@ jobs:
         distribution: 'temurin'
 
     - name: Build Docker image
-      run: docker build -t simple-java-app:latest .
+      run: docker build -t simple-java-app:1.0.${{ vars.VERSION }} .
 
     - name: Tag Docker image
-      run: docker tag simple-java-app:latest adirwaitzman/simple-java-app:latest
+      run: docker tag simple-java-app:1.0.${{ vars.VERSION }} adirwaitzman/simple-java-app:1.0.${{ vars.VERSION }}
 
     - name: Log in to Docker Hub
       uses: docker/login-action@v1
@@ -33,7 +33,7 @@ jobs:
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
     - name: Push Docker image to Docker Hub
-      run: docker push adirwaitzman/simple-java-app:latest
+      run: docker push adirwaitzman/simple-java-app:1.0.${{ vars.VERSION }}
 
 
   increment_version:
