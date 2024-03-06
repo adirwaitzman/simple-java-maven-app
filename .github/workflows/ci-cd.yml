@@ -45,3 +45,15 @@ jobs:
 
     - name: Push Docker image to Docker Hub
       run: docker push adirwaitzman/simple-java-app:latest
+
+
+  increment_version:
+    runs-on: ubuntu-latest
+    needs: build_and_delivery
+    if: ${{ success() }}
+    steps:
+    - name: version increanent
+      uses: action-pack/increment@v2
+      with:
+        name: 'VERSION'
+        token: ${{ secrets.REPO_ACCESS_TOKEN }}
